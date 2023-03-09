@@ -22,7 +22,8 @@ build-linux:
 build-osx:
 	GOOS=darwin go build -o release/$(BINARY)-$(VERSION)-osx
 build-deb:
-	which -s dpkg-deb || { echo "dpkg-deb does not exist, exiting..."; exit 1; }
+	which dpkg-deb || { echo "dpkg-deb does not exist, exiting..."; exit 1; }
+        if [ -f "release" ]; then echo "Folder release exist. Please run make clean"; fi || mkdir release
 	mkdir release/$(BINARY)-$(VERSION)
 	mkdir -p release/$(BINARY)-$(VERSION)/usr/local/bin
 	mkdir -p release/$(BINARY)-$(VERSION)/etc/deb-simple
